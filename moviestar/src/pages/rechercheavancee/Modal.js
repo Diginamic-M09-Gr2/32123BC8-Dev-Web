@@ -1,22 +1,23 @@
 import React from 'react';
+import './Modal.css'; // Import the CSS file
 
-const Modal = ({ title, results, onClose }) => {
+const Modal = ({ title, content, onClose }) => {
     return (
         <div className="modal-overlay">
             <div className="modal">
                 <div className="modal-header">
-                    <h2>{title}</h2>
-                    <button onClick={onClose}>&times;</button>
+                    {title && <h2>{title}</h2>}
+                    <button className="close-button" onClick={onClose}>&times;</button>
                 </div>
                 <div className="modal-content">
-                    {results && results.length > 0 ? (
-                        <ul>
-                            {results.map((result, index) => (
-                                <li key={index}>{result}</li>
+                    {content ? (
+                        <ul className="modal-list">
+                            {content.map((item, index) => (
+                                <li key={index}>{item}</li>
                             ))}
                         </ul>
                     ) : (
-                        <p>No results to display</p>
+                        <p className="no-results">No results to display</p>
                     )}
                 </div>
             </div>

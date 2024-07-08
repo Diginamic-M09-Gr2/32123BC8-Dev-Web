@@ -1,7 +1,5 @@
-// src/services/backendActeursService.js
 import axios from 'axios';
-// eslint-disable-next-line
-const BASE_URL = 'http://localhost:8080';  // Décommentez cette ligne
+
 
 const handleError = (error) => {
     console.error('Error during API request:', error);
@@ -18,14 +16,28 @@ const handleError = (error) => {
 
     throw error;
 };
+
 const backendActeursService = {
-    getAllActeurs: () => axios.get(`${BASE_URL}/acteurs`).catch(handleError),
-    getActeurById: (id) => axios.get(`${BASE_URL}/acteurs/${id}`).catch(handleError),
-    createActeur: (acteur) => axios.post(`${BASE_URL}/acteurs`, acteur).catch(handleError),
-    updateActeur: (id, acteur) => axios.put(`${BASE_URL}/acteurs/${id}`, acteur).catch(handleError),
-    deleteActeurById: (id) => axios.delete(`${BASE_URL}/acteurs/${id}`).catch(handleError),
-    getFilmsByActeurId: (id) => axios.get(`${BASE_URL}/acteurs/${id}/films`).catch(handleError),
-    fetchActeurFilms: (id) => axios.get(`${BASE_URL}/acteurs/${id}/films`).catch(handleError),
+    getAllActeurs: (page = 0, size = 10) =>
+        axios.get(`/acteurs?page=${page}&size=${size}`).catch(handleError),
+
+    getActeurById: (id) =>
+        axios.get(`/acteurs/${id}`).catch(handleError),
+
+    createActeur: (acteur) =>
+        axios.post(`/acteurs`, acteur).catch(handleError),
+
+    updateActeur: (id, acteur) =>
+        axios.put(`/acteurs/${id}`, acteur).catch(handleError),
+
+    deleteActeurById: (id) =>
+        axios.delete(`/acteurs/${id}`).catch(handleError),
+
+    getFilmsByActeurId: (id) =>
+        axios.get(`/acteurs/${id}/films`).catch(handleError),
+
+    fetchActeurFilms: (id) =>
+        axios.get(`/acteurs/${id}/films`).catch(handleError),
 
     // Additional methods based on repository queries
     // Add more methods as needed for your specific requirements

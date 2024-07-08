@@ -1,99 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import RealisateursTitle from './RealisateursTitle';
-import RealisateursSearchBar from './RealisateursSearchBar';
-import RealisateurList from './RealisateurList';
-import ModifyRealisateurModal from './ModifyRealisateurModal';
-import backendRealisateurService from '../../services/backendRealisateursService';
+import React from 'react';
+import RealisateursSearchBar from '../../components/searchBar/realisateurs/RealisateursSearchBar'
+import RealisateurList from '../../components/list/realisateurs/RealisateurList';
+import ModifyRealisateurModal from '../../components/modify/realisateurs/ModifyRealisateurModal';
 import { FaCog } from 'react-icons/fa';
-import '../../styles/boutonmodifier.css';
-import FilmInfo from './FilmInfo'; // Import the new FilmInfo component
-
+import FilmInfo from '../../modal/realisateurs/info/FilmInfo';
+import useRealisateurs from '../../components/hooks/realisateurs/useRealisateurs';
+import './realisateurs.css'; // Import the CSS file here
+import '../../styles/boutonmodifier.css'
 
 const Realisateurs = () => {
-    const [realisateurs, setRealisateurs] = useState([]);
-    const [filteredRealisateurs, setFilteredRealisateurs] = useState([]);
-    const [isModifierButtonClicked, setIsModifierButtonClicked] = useState(false);
-    const [modifyModalOpen, setModifyModalOpen] = useState(false);
-    const [selectedRealisateur, setSelectedRealisateur] = useState(null);
-
-    useEffect(() => {
-        backendRealisateurService.getAllRealisateurs().then((response) => {
-            setRealisateurs(response.data);
-            setFilteredRealisateurs(response.data);
-        });
-    }, []);
-
-    const handleSearch = (searchTerm) => {
-        const filteredList = realisateurs.filter((realisateur) =>
-            realisateur.nom.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredRealisateurs(filteredList);
-    };
-
-    const handleRealisateurClick = async (realisateur) => {
-        try {
-            if (realisateur.id !== undefined) {
-                setSelectedRealisateur(realisateur);
-
-                // Open the modification modal on realisateur click
-                setModifyModalOpen(true);
-
-                // Fetch and show films in the film section
-                const filmsData = await backendRealisateurService.fetchRealisateurFilms(
-                    realisateur.id
-                );
-
-                if (Array.isArray(filmsData.data)) {
-                    // Update the state with the films
-                    setSelectedRealisateur({
-                        ...realisateur,
-                        films: filmsData.data,
-                    });
-                } else {
-                    console.error('Invalid or missing films data:', filmsData);
-                }
-            } else {
-                console.error('Realisateur ID is undefined.');
-            }
-        } catch (error) {
-            console.error('Error fetching films:', error);
-        }
-    };
-
-    const handleSaveModifiedRealisateur = async (modifiedInfo, isModifierButtonClicked) => {
-        try {
-            if (selectedRealisateur && isModifierButtonClicked) {
-                // Send a request to update the realisateur in the backend
-                await backendRealisateurService.updateRealisateur(
-                    selectedRealisateur.idRealisateur,
-                    modifiedInfo
-                );
-
-                // Update the state with the modified realisateur
-                setRealisateurs((prevRealisateurs) =>
-                    prevRealisateurs.map((r) =>
-                        r && r.id === selectedRealisateur.id ? { ...r, ...modifiedInfo } : r
-                    )
-                );
-
-                setModifyModalOpen(false);
-                setSelectedRealisateur(null); // Reset selected realisateur after modification
-            } else {
-                console.error('Selected realisateur is undefined or Modifier button is not clicked.');
-            }
-        } catch (error) {
-            console.error('Error updating realisateur:', error);
-            // Handle error as needed
-        }
-    };
+    const {
+        realisateurs,
+        filteredRealisateurs,
+        isModifierButtonClicked,
+        modifyModalOpen,
+        selectedRealisateur,
+        page,
+        totalPages,
+        setIsModifierButtonClicked,
+        setModifyModalOpen,
+        setPage,
+        handleSearch,
+        handleRealisateurClick,
+        handleSaveModifiedRealisateur
+    } = useRealisateurs();
 
     return (
-        <div>
-            <RealisateursTitle/>
-            <RealisateursSearchBar onSearch={handleSearch}/>
+        <div className="page-container">
+            <RealisateursSearchBar onSearch={handleSearch} />
             <div className="modify-button-container">
                 <button className="modify-button" onClick={() => setIsModifierButtonClicked(true)}>
-                    Modifier Realisateurs <FaCog className="modify-button-icon"/>
+                    Modifier Realisateurs <FaCog className="modify-button-icon" />
                 </button>
             </div>
             {isModifierButtonClicked && (
@@ -101,21 +38,30 @@ const Realisateurs = () => {
                     isOpen={modifyModalOpen}
                     handleClose={() => setIsModifierButtonClicked(false)}
                     realisateur={selectedRealisateur}
-                    onSave={(modifiedInfo) =>
-                        handleSaveModifiedRealisateur(modifiedInfo, isModifierButtonClicked)
-                    }
+                    onSave={(modifiedInfo) => handleSaveModifiedRealisateur(modifiedInfo, isModifierButtonClicked)}
                 />
             )}
-            <div>
+            <div className="main-content">
                 <div className="realisateurs-list">
                     <RealisateurList
                         realisateurs={filteredRealisateurs}
                         handleRealisateurClick={(realisateur) =>
-                            handleRealisateurClick({...realisateur, id: realisateur.idRealisateur})
+                            handleRealisateurClick({ ...realisateur, id: realisateur.idRealisateur })
                         }
                     />
                 </div>
                 {selectedRealisateur && <FilmInfo selectedRealisateur={selectedRealisateur} />}
+            </div>
+            <div className="pagination-controls">
+                <button onClick={() => setPage(page - 1)} disabled={page === 0}>
+                    Previous
+                </button>
+                <span>
+                    Page {page + 1} of {totalPages}
+                </span>
+                <button onClick={() => setPage(page + 1)} disabled={page + 1 === totalPages}>
+                    Next
+                </button>
             </div>
         </div>
     );

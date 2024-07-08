@@ -1,5 +1,6 @@
-import React, { useState} from 'react';
-import backendRechercheService from "../../services/backendRechercheService";
+import React, { useState } from 'react';
+import backendRechercheService from '../../services/backendRechercheService';
+import './ActeursCommuns2Films.css'; // Import the CSS file
 
 const ActeursCommuns2Films = ({ onUpdateModalResults }) => {
     const [filmId1, setFilmId1] = useState('');
@@ -18,7 +19,7 @@ const ActeursCommuns2Films = ({ onUpdateModalResults }) => {
         try {
             const response = await backendRechercheService.getActeursInFilms(filmId1, filmId2);
             const results = response.data.map(acteur => acteur[0]);
-            onUpdateModalResults(results);
+            onUpdateModalResults(`Acteurs communs à deux films`, results);
             setActeurs(response.data);
         } catch (error) {
             console.error('Error fetching acteurs:', error);
@@ -26,25 +27,21 @@ const ActeursCommuns2Films = ({ onUpdateModalResults }) => {
     };
 
     return (
-        <div>
-            <h2>Acteurs communs à deux Films</h2>
+        <div className="acteurs-communs-container">
+            <h3>Acteurs communs à deux Films</h3>
             <label>
                 Id Film 1:
                 <input type="text" value={filmId1} onChange={handleActeursInFilmId1Change} />
             </label>
-            <br />
             <label>
                 Id Film 2:
                 <input type="text" value={filmId2} onChange={handleActeursInFilmId2Change} />
             </label>
-            <br />
             <button onClick={handleFetchActeursInFilms}>Valider</button>
             <ul>
                 {acteurs.length > 0 ? (
                     acteurs.map((acteur, index) => (
-                        <li key={index}>
-                            <strong>Acteurs:</strong> {acteur[0]},
-                        </li>
+                        <li key={index}>{acteur[0]}</li>
                     ))
                 ) : (
                     <li>Renseignez un id valide</li>

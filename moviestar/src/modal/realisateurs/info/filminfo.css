@@ -1,0 +1,63 @@
+.film-info {
+    flex: 1;
+    margin: 20px auto; /* Centering the div */
+    padding: 20px;
+    max-width: 800px; /* Increased max-width for better handling of horizontal layout */
+    border-radius: 10px;
+    background-color: #1a1a1a;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust as needed */
+    opacity: 0; /* Start with opacity 0 to hide initially */
+    animation: fadeIn 0.5s ease-in-out forwards; /* Define fadeIn animation */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px); /* Start position outside */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* End position at 0 (default) */
+    }
+}
+
+.film-info h2 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.film-info ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.film-info li {
+    flex: 1 0 45%; /* Adjust the width as needed */
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #2a2a2a;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s ease-in-out forwards; /* Define slideIn animation */
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px); /* Start position outside */
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); /* End position at 0 (default) */
+    }
+}
+
+.film-info li p {
+    margin: 5px 0;
+}

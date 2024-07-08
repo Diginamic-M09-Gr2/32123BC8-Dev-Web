@@ -4,6 +4,8 @@ import fr.diginamic.projetspring.entities.Film;
 import fr.diginamic.projetspring.entities.Genre;
 import fr.diginamic.projetspring.repositories.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -28,8 +30,8 @@ public class FilmService {
      * @return Une liste de tous les films.
      */
 
-    public List<Film> getAllFilms() {
-        return filmRepository.findAll();
+    public Page<Film> getAllFilms(Pageable pageable) {
+        return filmRepository.findAll(pageable);
     }
 
     /**
@@ -147,3 +149,4 @@ public class FilmService {
         return filmRepository.findFilmsBetweenYearsAndByActeur(startYear, endYear, acteurId);
     }
 }
+

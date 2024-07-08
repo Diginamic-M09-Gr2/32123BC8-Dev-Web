@@ -1,6 +1,6 @@
-// src/pages/FilmsEntre2Annees.js
 import React, { useState } from 'react';
-import backendRechercheService from "../../services/backendRechercheService";
+import backendRechercheService from '../../services/backendRechercheService';
+import './FilmsEntre2Annees.css'; // Import the CSS file
 
 const FilmsEntre2Annees = ({ onUpdateModalResults }) => {
     const [startYear, setStartYear] = useState('');
@@ -27,24 +27,17 @@ const FilmsEntre2Annees = ({ onUpdateModalResults }) => {
     };
 
     return (
-        <div>
-            <h2>Films entre deux années</h2>
+        <div className="films-entre-annees-container">
+            <h3>Films entre deux années</h3>
             <label>
                 Année début :
                 <input type="text" value={startYear} onChange={handleBetweenYearsStartYearChange} />
             </label>
-            <br />
             <label>
-                Année de fin   :
+                Année de fin :
                 <input type="text" value={endYear} onChange={handleBetweenYearsEndYearChange} />
             </label>
-            <br />
             <button onClick={handleFetchFilmsBetweenYears}>Voir Films</button>
-            <ul>
-                {films.map((film, index) => (
-                    <li key={index}>{film.nom} ({film.anneeSortie})</li>
-                ))}
-            </ul>
         </div>
     );
 };
