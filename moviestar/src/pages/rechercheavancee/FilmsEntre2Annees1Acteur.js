@@ -1,11 +1,11 @@
-// src/pages/FilmsEntre2Annees.js
 import React, { useState } from 'react';
-import backendRechercheService from "../../services/backendRechercheService";
+import backendRechercheService from '../../services/backendRechercheService';
+import './FilmsEntre2Annees1Acteur.css'; // Import the CSS file
 
 const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
     const [startYear, setStartYear] = useState('');
     const [endYear, setEndYear] = useState('');
-    const [acteurId, setActeurId] = useState('')
+    const [acteurId, setActeurId] = useState('');
     const [films, setFilms] = useState([]);
 
     const handleYearsAndByActeurStartYearChange = (e) => {
@@ -22,7 +22,6 @@ const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
 
     const handleFetchFilmsBetweenYearsAndByActeur = async () => {
         try {
-            // Check if acteurId is a valid number
             if (!isNaN(acteurId)) {
                 const response = await backendRechercheService.getFilmsReleasedBetweenYearsAndByActeur(startYear, endYear, acteurId);
                 const results = response.data.map(film => `${film.nom} (${film.anneeSortie})`);
@@ -37,30 +36,25 @@ const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
     };
 
     return (
-        <div>
-            <h2>Films entre deux années avec un Acteur commun</h2>
+        <div className="films-entre-annees-acteur-container">
+            <h3>Films entre deux années avec un Acteur commun</h3>
             <label>
                 Année début :
-                <input type="text" value={startYear} onChange={handleYearsAndByActeurStartYearChange}/>
-            </label>
-            <br/>
-            <label>
-                Année de fin    :
-                <input type="text" value={endYear} onChange={handleYearsAndByActeurEndYearChange}/>
+                <input type="text" value={startYear} onChange={handleYearsAndByActeurStartYearChange} />
             </label>
             <label>
-                Id Acteur:
-                <input type="text" value={acteurId} onChange={handleYearsAndByActeurIdChange}/>
+                Année de fin :
+                <input type="text" value={endYear} onChange={handleYearsAndByActeurEndYearChange} />
             </label>
-            <br/>
-            <button onClick={handleFetchFilmsBetweenYearsAndByActeur}>voir Films</button>
+            <label>
+                Id Acteur :
+                <input type="text" value={acteurId} onChange={handleYearsAndByActeurIdChange} />
+            </label>
+            <button onClick={handleFetchFilmsBetweenYearsAndByActeur}>Voir Films</button>
             <ul>
                 {films.length > 0 ? (
                     films.map((film, index) => (
-                        <li key={index}>
-                            <strong>Nom de Films:</strong> {film[0]},
-                            <strong> Année de Sortie:</strong> {film[1]}
-                        </li>
+                        <li key={index}>{film.nom} ({film.anneeSortie})</li>
                     ))
                 ) : (
                     <li>Renseignez un Id</li>

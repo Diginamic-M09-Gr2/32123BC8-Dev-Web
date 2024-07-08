@@ -1,0 +1,37 @@
+.acteurs-communs-container {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.acteurs-communs-container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.acteurs-communs-container input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.acteurs-communs-container button {
+    padding: 10px 15px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.acteurs-communs-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.acteurs-communs-container li {
+    margin-bottom: 10px;
+}

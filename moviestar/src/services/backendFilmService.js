@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const backendFilmService = {
-    getAllFilms: () => axios.get(`/films`),
+    getAllFilms: (page=0, size=10) =>
+        axios.get(`/films?page=${page}&size=${size}`),
     getFilmById: (id) => axios.get(`/films/${id}`),
     createFilm: (film) => axios.post(`/films`, film),
     updateFilm: (id, film) => axios.put(`/films/${id}`, film),

@@ -1,10 +1,10 @@
 // src/services/realisateurService.js
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080'; // Replace with your actual backend URL
 
 const backendRealisateursService = {
-    getAllRealisateurs: () => axios.get(`/realisateurs`),
+    getAllRealisateurs: (page = 0, size = 10) =>
+        axios.get(`/realisateurs?page=${page}&size=${size}`),
     getRealisateurById: (id) => axios.get(`/realisateurs/${id}`),
     createRealisateur: (realisateur) => axios.post(`/realisateurs`, realisateur),
     updateRealisateur: (id, realisateur) => axios.put(`/realisateurs/${id}`, realisateur),

@@ -1,0 +1,49 @@
+/* src/pages/realisateurs/realisateurs.css */
+.realisateurs-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.realisateurs-list li {
+    margin-bottom: 10px;
+}
+
+/* Ensure the page container takes the full height of the viewport */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent overall page scrolling */
+    background: #007bff; /* Background color for testing */
+}
+
+/* Adjust the main content to use Flexbox for better layout */
+.main-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex: 1; /* Allow the main content to take available space */
+    margin-top: 20px;
+}
+
+/* Adjust pagination controls to be centered */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0; /* Add background color */
+}
+
+.pagination-controls button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #ffcc00;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+

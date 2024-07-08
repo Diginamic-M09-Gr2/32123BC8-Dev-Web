@@ -1,13 +1,14 @@
 package fr.diginamic.projetspring.controllers;
 
-import fr.diginamic.projetspring.entities.Film;
-import fr.diginamic.projetspring.entities.Genre;
-import fr.diginamic.projetspring.entities.Realisateur;
-import fr.diginamic.projetspring.entities.RoleFilm;
+import fr.diginamic.projetspring.dto.ActeurDTO;
+import fr.diginamic.projetspring.dto.FilmDTO;
+import fr.diginamic.projetspring.entities.*;
 import fr.diginamic.projetspring.services.ActeurService;
 import fr.diginamic.projetspring.services.FilmService;
 import fr.diginamic.projetspring.services.RoleFilmService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,9 +39,9 @@ public class FilmController {
      * @return La liste de tous les films.
      */
     @GetMapping
-    public ResponseEntity<List<Film>> getAllFilms() {
-        List<Film> films = filmService.getAllFilms();
-        return new ResponseEntity<>(films, HttpStatus.OK);
+    public Page<FilmDTO> getAllFilms(Pageable pageable) {
+        Page<Film> filmsPage = filmService.getAllFilms(pageable);
+        return filmsPage.map(this::convertToDTO);
     }
 
     /**
@@ -75,7 +76,7 @@ public class FilmController {
      * @return Le film mis à jour.
      */
     @PutMapping("/{filmId}")
-    public Film updateFilm(@PathVariable(name = "filmId") Integer filmId, @RequestBody Film film) {
+    public Film updateFilm(@PathVariable("filmId") Integer filmId, @RequestBody Film film) {
         return filmService.updateFilm(filmId, film);
     }
 
@@ -87,10 +88,9 @@ public class FilmController {
      * @return Réponse indiquant le succès de l'opération.
      */
     @DeleteMapping("/{filmId}")
-    public void deleteFilm(@PathVariable(name = "filmId") Integer filmId) {
+    public void deleteFilm(@PathVariable Integer filmId) {
         filmService.deleteFilm(filmId);
     }
-
 
     // Opérations spécifiques
 
@@ -106,7 +106,7 @@ public class FilmController {
     }
 
     @GetMapping("/byGenre")
-    public List<Film> getFilmsByGenre(@RequestParam("genreType") String genreType) {
+    public List<Film> getFilmsByGenre(@RequestParam String genreType) {
         // Example of using findByGenres_Type
         return filmService.getFilmsByGenre(genreType);
     }
@@ -145,5 +145,22 @@ public class FilmController {
                                                           @RequestParam("acteurId") Integer acteurId) {
         return filmService.findFilmsBetweenYearsAndByActeur(startYear, endYear, acteurId);
     }
+
+    private FilmDTO convertToDTO(Film film) {
+        FilmDTO dto = new FilmDTO();
+        dto.setFilmId(film.getFilmId());
+        dto.setIdIMDB(film.getIdIMDB());
+        dto.setNom(film.getNom());
+        dto.setAnneeSortie(film.getAnneeSortie());
+        dto.setRating(film.getRating());
+        dto.setUrlProfile(film.getUrlProfile());
+        dto.setLieuTournage(film.getLieuTournage());
+        dto.setLangue(film.getLangue());
+        dto.setResume(film.getResume());
+        dto.setPays(film.getPays());
+        dto.setGenres(film.getGenres());
+        return dto;
+    }
+
 
 }
