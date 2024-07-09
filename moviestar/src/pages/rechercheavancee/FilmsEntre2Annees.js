@@ -37,7 +37,7 @@ const FilmsEntre2Annees = ({ onUpdateModalResults }) => {
                 Année de fin :
                 <input type="text" value={endYear} onChange={handleBetweenYearsEndYearChange} />
             </label>
-            <button onClick={handleFetchFilmsBetweenYears}>Voir Films</button>
+            <button onClick={handleFetchFilmsBetweenYears}>Valider</button>
         </div>
     );
 };

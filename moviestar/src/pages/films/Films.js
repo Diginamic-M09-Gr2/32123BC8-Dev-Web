@@ -1,12 +1,13 @@
 import React from 'react';
 import FilmsSearchBar from '../../components/searchBar/films/FilmsSearchBar';
 import FilmsList from '../../components/list/films/FilmsList';
-import ModifyFilmModal from '../../components/modify/films/ModifyFilmModal';
+import ModifyFilmModal from '../../components/modify/ModifyFilmModal';
 import { FaCog } from 'react-icons/fa';
 import RoleInfo from '../../modal/films/info/RoleInfo';
 import useFilms from '../../components/hooks/films/useFilms';
-import '../realisateurs/realisateurs.css';
 import '../../styles/global.css';
+import '../generalpage.css';
+import PaginationControl from "../../components/pagination/paginationControl";
 
 const Films = () => {
     const {
@@ -42,7 +43,7 @@ const Films = () => {
                 />
             )}
             <div className="main-content">
-                <div className="films-list">
+                <div className="general-list">
                     <FilmsList
                         films={filteredFilms}
                         handleFilmClick={(film) => handleFilmClick({ ...film, id: film.filmId })}
@@ -50,17 +51,7 @@ const Films = () => {
                 </div>
                 {selectedFilm && <RoleInfo selectedFilm={selectedFilm} />}
             </div>
-            <div className="pagination-controls">
-                <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-                    Previous
-                </button>
-                <span>
-                    Page {page + 1} of {totalPages}
-                </span>
-                <button onClick={() => setPage(page + 1)} disabled={page + 1 === totalPages}>
-                    Next
-                </button>
-            </div>
+            <PaginationControl page={page} totalPages={totalPages} setPage={setPage} />
         </div>
     );
 };

@@ -38,15 +38,6 @@ const ActeursCommuns2Films = ({ onUpdateModalResults }) => {
                 <input type="text" value={filmId2} onChange={handleActeursInFilmId2Change} />
             </label>
             <button onClick={handleFetchActeursInFilms}>Valider</button>
-            <ul>
-                {acteurs.length > 0 ? (
-                    acteurs.map((acteur, index) => (
-                        <li key={index}>{acteur[0]}</li>
-                    ))
-                ) : (
-                    <li>Renseignez un id valide</li>
-                )}
-            </ul>
         </div>
     );
 };

@@ -2,7 +2,7 @@
 import React from 'react';
 
 const ActeurItem = ({ acteur, onClick, isSelected }) => (
-    <div onClick={onClick} className={`listitem-frame ${isSelected ? 'selected' : ''}`}>
+    <div onClick={onClick} className={`pages-listitem-frame ${isSelected ? 'selected' : ''}`}>
 
         <strong>{acteur.nom}</strong> <br />
         Date de naissance: {acteur.dateNaissance} <br />

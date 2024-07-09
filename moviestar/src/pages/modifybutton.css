@@ -7,7 +7,7 @@
 }
 
 .modify-button {
-    background-color: rgba(255, 0, 0, 0.8); /* Red background color with 80% opacity */
+    background-color: rgb(255, 0, 21); /* Red background color with 80% opacity */
     color: rgb(147, 142, 142); /* White text color without transparency */
     border: none;
     padding: 10px 20px;

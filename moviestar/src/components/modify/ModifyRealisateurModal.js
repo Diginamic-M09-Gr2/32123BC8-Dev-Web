@@ -1,6 +1,6 @@
 // ModifyRealisateurModal.js
 import React, { useState, useEffect } from 'react';
-import './ModifyRealisateurModal.css';
+import './modifymodal.css';
 
 const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) => {
     const [modifiedInfo, setModifiedInfo] = useState({
@@ -37,9 +37,9 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
     };
 
     return (
-        <div className={`modify-realisateur-modal ${isOpen ? 'open' : ''}`}>
-            <div className="modal-content">
-                <button className="modal-close" onClick={handleClose}>
+        <div className={`modify-modal ${isOpen ? 'open' : ''}`}>
+            <div className="modify-modal-content">
+                <button className="modify-modal-close" onClick={handleClose}>
                     Close
                 </button>
                 <h2>La mélodie n'est pas toujours harmonieuse, changer les informations erronées ici</h2>

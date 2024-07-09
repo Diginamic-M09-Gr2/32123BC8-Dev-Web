@@ -11,28 +11,6 @@
   }
 }
 
-.home-page-container {
-  margin: 0;
-  padding: 0;
-}
-
-.title {
-  font-size: 60px;
-  font-weight: bold;
-  font-family: 'Arial', serif; /* Modification de la police en Georgia */
-  color: #181414;
-  margin: 3px 0;
-  position: absolute;
-  top: 25%;
-  left: 53%;
-  transform: translate(0%) perspective(1000px) rotateX(15deg);
-}
-
-.full-width-image {
-  width: 100%;
-  height: 891px;
-}
-
 .button-container {
   display: flex;
   justify-content: space-around;
@@ -55,37 +33,6 @@
   &:hover {
     background-color: #0056b3;
   }
-}
-
-.info-window {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 90%;
-  background-color: black;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  /* Opacité initiale fixée à 1 pour assurer la visibilité */
-  opacity: 1;
-}
-
-.info-window .black-band {
-  background-color: black;
-  height: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  border-radius: 10px 10px 0 0;
-}
-
-.info-window p {
-  color: red;
-  margin-top: 10px;
 }
 
 p {

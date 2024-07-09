@@ -1,12 +1,13 @@
 import React from 'react';
 import ActeursSearchBar from '../../components/searchBar/acteurs/ActeursSearchBar';
 import ActeursList from '../../components/list/acteurs/ActeursList';
-import ModifyActeurModal from '../../components/modify/acteurs/ModifyActeurModal';
+import ModifyActeurModal from '../../components/modify/ModifyActeurModal';
 import { FaCog } from 'react-icons/fa';
 import FilmInfo from '../../modal/acteurs/info/FilmInfo';
 import useActeurs from '../../components/hooks/acteurs/useActeurs';
-import '../realisateurs/realisateurs.css'; // Import the CSS file here
-import '../../styles/boutonmodifier.css';
+import '../generalpage.css'; // Import the CSS file here
+import '../modifybutton.css';
+import PaginationControl from "../../components/pagination/paginationControl";
 
 const Acteurs = () => {
     const {
@@ -42,7 +43,7 @@ const Acteurs = () => {
                 />
             )}
             <div className="main-content">
-                <div className="acteurs-list">
+                <div className="general-list">
                     <ActeursList
                         acteurs={filteredActeurs}
                         handleActeurClick={(acteur) =>
@@ -52,17 +53,7 @@ const Acteurs = () => {
                 </div>
                 {selectedActeur && <FilmInfo selectedActeur={selectedActeur} />}
             </div>
-            <div className="pagination-controls">
-                <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-                    Previous
-                </button>
-                <span>
-                    Page {page + 1} of {totalPages}
-                </span>
-                <button onClick={() => setPage(page + 1)} disabled={page + 1 === totalPages}>
-                    Next
-                </button>
-            </div>
+            <PaginationControl page={page} totalPages={totalPages} setPage={setPage} />
         </div>
     );
 };

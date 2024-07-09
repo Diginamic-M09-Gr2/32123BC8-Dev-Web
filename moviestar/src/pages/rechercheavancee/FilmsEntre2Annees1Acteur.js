@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import backendRechercheService from '../../services/backendRechercheService';
 import './FilmsEntre2Annees1Acteur.css'; // Import the CSS file
+import Modal from './Modal'; // Assuming correct path to Modal component
 
 const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
     const [startYear, setStartYear] = useState('');
     const [endYear, setEndYear] = useState('');
     const [acteurId, setActeurId] = useState('');
     const [films, setFilms] = useState([]);
+    const [modalContent, setModalContent] = useState(null);
 
     const handleYearsAndByActeurStartYearChange = (e) => {
         setStartYear(e.target.value);
@@ -23,16 +25,29 @@ const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
     const handleFetchFilmsBetweenYearsAndByActeur = async () => {
         try {
             if (!isNaN(acteurId)) {
+                console.log(`Fetching films for acteurId: ${acteurId}, between ${startYear} and ${endYear}`);
                 const response = await backendRechercheService.getFilmsReleasedBetweenYearsAndByActeur(startYear, endYear, acteurId);
-                const results = response.data.map(film => `${film.nom} (${film.anneeSortie})`);
-                onUpdateModalResults(results);
-                setFilms(response.data);
+                console.log('Response:', response);
+
+                if (response.data && Array.isArray(response.data)) {
+                    console.log('Response data:', response.data);
+                    const formattedFilms = response.data.map(film => `${film[0]} (${film[1]})`);
+                    onUpdateModalResults(formattedFilms);
+                    setFilms(response.data);
+                    setModalContent(formattedFilms); // Set formatted films for modal
+                } else {
+                    console.error('Invalid response format:', response);
+                }
             } else {
                 console.error('Invalid acteurId:', acteurId);
             }
         } catch (error) {
             console.error('Error fetching films:', error);
         }
+    };
+
+    const handleCloseModal = () => {
+        setModalContent(null);
     };
 
     return (
@@ -50,16 +65,7 @@ const FilmsEntre2Annees1Acteur = ({ onUpdateModalResults }) => {
                 Id Acteur :
                 <input type="text" value={acteurId} onChange={handleYearsAndByActeurIdChange} />
             </label>
-            <button onClick={handleFetchFilmsBetweenYearsAndByActeur}>Voir Films</button>
-            <ul>
-                {films.length > 0 ? (
-                    films.map((film, index) => (
-                        <li key={index}>{film.nom} ({film.anneeSortie})</li>
-                    ))
-                ) : (
-                    <li>Renseignez un Id</li>
-                )}
-            </ul>
+            <button onClick={handleFetchFilmsBetweenYearsAndByActeur}>Valider</button>
         </div>
     );
 };

@@ -4,8 +4,7 @@ import FilmsItem from './FilmsItem'; // Import the FilmItem component
 
 const FilmsList = ({ films, handleFilmClick }) => {
     return (
-        <div className="realisateurs-list">
-            <h2>Liste de Films</h2>
+        <div className="pages-list">
             <ul>
                 {films.map((film, index) => (
                     <li key={index}>

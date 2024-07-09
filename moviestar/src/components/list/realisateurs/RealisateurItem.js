@@ -1,10 +1,10 @@
 // RealisateurItem.js
 import React from 'react';
-import './ItemRealisateurs.css';
+import '../pageslist.css';
 
 const RealisateurItem = ({ realisateur, onClick }) => {
     return (
-        <div className="listitem-frame" onClick={onClick}>
+        <div className="pages-listitem-frame" onClick={onClick}>
             <strong className="cinzel-font">{realisateur.nom}</strong> <br />
             <span className="bebas-neue-font">Date de naissance: {realisateur.dateNaissance}</span> <br />
             <span className="bebas-neue-font">Lieu de naissance: {realisateur.lieuNaissance}</span> <br />

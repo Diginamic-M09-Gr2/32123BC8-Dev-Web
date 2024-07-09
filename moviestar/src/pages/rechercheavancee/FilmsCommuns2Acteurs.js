@@ -37,18 +37,7 @@ const FilmsCommuns2Acteurs = ({ onUpdateModalResults }) => {
                 Id Acteur 2:
                 <input type="text" value={acteurId2} onChange={handleFilmsByTwoActeurId2Change} />
             </label>
-            <button onClick={handleFetchFilmsByTwoActors}>Voir Films</button>
-            <ul>
-                {films.length > 0 ? (
-                    films.map((film, index) => (
-                        <li key={index}>
-                            {film[0]} ({film[1]})
-                        </li>
-                    ))
-                ) : (
-                    <li>Pas de film correspondant</li>
-                )}
-            </ul>
+            <button onClick={handleFetchFilmsByTwoActors}>Valider</button>
         </div>
     );
 };

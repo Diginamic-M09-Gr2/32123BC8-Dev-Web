@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ModifyFilmModal.css';
+import './modifymodal.css';
 
 const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
     const [modifiedInfo, setModifiedInfo] = useState({
@@ -48,9 +48,9 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
     };
 
     return (
-        <div className={`modify-film-modal ${isOpen ? 'open' : ''}`}>
-            <div className="modal-content">
-                <button className="modal-close" onClick={handleClose}>
+        <div className={`modify-modal ${isOpen ? 'open' : ''}`}>
+            <div className="modify-modal-content">
+                <button className="modify-modal-close" onClick={handleClose}>
                     Close
                 </button>
                 <h2>Modify Film Details</h2>

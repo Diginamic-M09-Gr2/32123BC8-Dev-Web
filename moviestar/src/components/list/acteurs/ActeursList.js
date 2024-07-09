@@ -1,13 +1,13 @@
 // ActeursList.js
 import React, { useRef } from 'react';
-import '../../../styles/acteurs.css';
+import '../pageslist.css';
 import ActeurItem from './ActeurItem'; // Correction ici : import ActeurItem
 
 const ActeursList = ({ acteurs, handleActeurClick }) => {
     const acteursListRef = useRef();
 
     return (
-        <div className="acteurs-list" ref={acteursListRef}>
+        <div className="pages-list" ref={acteursListRef}>
             <ul>
                 {acteurs.map((acteur) => (
                     <li key={acteur.id}>

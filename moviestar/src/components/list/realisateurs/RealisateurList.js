@@ -1,10 +1,10 @@
 import React from 'react';
 import RealisateurItem from './RealisateurItem';
-import './ListRealisateurs.css';
+import '../pageslist.css';
 
 const RealisateurList = ({ realisateurs, handleRealisateurClick }) => {
     return (
-        <div className="realisateurs-list">
+        <div className="pages-list">
             <ul>
                 {realisateurs.map((realisateur, index) => (
                     <li key={index}>

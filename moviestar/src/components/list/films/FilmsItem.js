@@ -1,9 +1,9 @@
 import React from 'react';
-import '../realisateurs/ListRealisateurs.css';
+import '../pageslist.css';
 
 const FilmsItem = ({ film, onClick }) => {
     return (
-        <div className="listitem-frame" onClick={onClick}>
+        <div className="pages-listitem-frame" onClick={onClick}>
             <strong className="cinzel-font">Nom: {film.nom}</strong> <br />
             <span className="bebas-neue-font">Année de sortie: {film.anneeSortie}</span> <br />
             <span className="bebas-neue-font">Lieu de tournage: {film.lieuTournage}</span> <br />

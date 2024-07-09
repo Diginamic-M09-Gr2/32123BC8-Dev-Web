@@ -1,6 +1,6 @@
 // ModifyActeurModal.js
 import React, { useState, useEffect } from 'react';
-import '../../../styles/ModifyActeurModal.css';
+import './modifymodal.css';
 
 const ModifyActeurModal = ({ isOpen, handleClose, acteur, onSave }) => {
     const [modifiedInfo, setModifiedInfo] = useState({
@@ -39,9 +39,9 @@ const ModifyActeurModal = ({ isOpen, handleClose, acteur, onSave }) => {
     };
 
     return (
-        <div className={`modify-acteur-modal ${isOpen ? 'open' : ''}`}>
-            <div className="modal-content">
-                <button className="modal-close" onClick={handleClose}>
+        <div className={`modify-modal ${isOpen ? 'open' : ''}`}>
+            <div className="modify-modal-content">
+                <button className="modify-modal-close" onClick={handleClose}>
                     Close
                 </button>
                 <h2>Modifier Acteur</h2>
