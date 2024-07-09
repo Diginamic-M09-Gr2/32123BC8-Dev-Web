@@ -54,25 +54,15 @@ public class RoleFilmService {
      * @param role Le rôle à enregistrer.
      * @return Le rôle enregistré.
      */
-   @Transactional
+    @Transactional
     public RoleFilm createRoleFilm(RoleFilm role) {
-       // Map IMDB IDs to database IDs
-       Acteur acteur = acteurService.findByIdIMDB(role.getActeur().getIdIMDB());
-       Film film = filmService.findByIdIMDB(role.getFilm().getIdIMDB());
-       role.setActeur(acteur);
-       role.setFilm(film);
-       return roleRepository.save(role);
-   }
-
-    public RoleFilm updateRoleFilm(Integer roleId, RoleFilm role) {
-        // Logique de mise à jour de l'acteur (par exemple, vérification de l'existence de l'acteur, validation des données, etc.)
-        if (roleRepository.existsById(roleId)) {
-            role.setActeurId(roleId);
-            return roleRepository.save(role);
-        }
-        return null; // Ou lancez une exception appropriée si nécessaire
+        // Map IMDB IDs to database IDs
+        Acteur acteur = acteurService.findByIdIMDB(role.getActeur().getIdIMDB());
+        Film film = filmService.findByIdIMDB(role.getFilm().getIdIMDB());
+        role.setActeur(acteur);
+        role.setFilm(film);
+        return roleRepository.save(role);
     }
-
 
 
     /**
@@ -97,7 +87,6 @@ public class RoleFilmService {
     public List<RoleFilm> findByActeurId(Integer acteurId) {
         return roleRepository.findAllByActeurId(acteurId);
     }
-
 
     // Ajoutez d'autres méthodes en fonction des besoins
 }

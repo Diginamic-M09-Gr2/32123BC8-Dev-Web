@@ -1,0 +1,47 @@
+.pages-list {
+    top: 5px;
+    left: 25px;
+    height: 100%;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 80vh;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.pages-list::-webkit-scrollbar {
+    display: none; /* WebKit (Chrome, Safari) */
+}
+
+/* realisateur-item.css */
+.pages-listitem-frame {
+    border: 1px solid #ccc; /* Example border styling */
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Include box-shadow in the transition */
+    box-shadow: 0 0 10px rgb(85, 255, 0), 0 0 20px rgba(255, 0, 0, 0.3); /* Red glow effect */
+    max-width: 600px;
+
+
+    /* Additional styling as needed */
+}
+
+.pages-listitem-frame:hover {
+    background-color: #f0f0f0; /* Example background color on hover */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.3); /* Red glow effect */
+}
+
+.cinzel-font {
+    font-family: 'Cinzel', serif;
+    /* Add additional styles if needed */
+}
+
+.bebas-neue-font {
+    font-family: 'Bebas Neue', sans-serif;
+    /* Add additional styles if needed */
+}
+
+

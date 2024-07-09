@@ -1,0 +1,28 @@
+/* Add this to your styles.css or relevant CSS file */
+.modify-button-container {
+    position: fixed;
+    top: 85px; /* Adjust according to your navigation bar height */
+    right: 25px; /* Adjust according to your desired position */
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.modify-button {
+    background-color: rgb(255, 0, 21); /* Red background color with 80% opacity */
+    color: rgb(147, 142, 142); /* White text color without transparency */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.modify-button:hover {
+    background-color: rgb(255, 204, 0); /* Darker red on hover with 80% opacity */
+}
+
+.modify-button-icon {
+    margin-right: 5px;
+}

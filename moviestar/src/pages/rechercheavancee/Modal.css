@@ -1,4 +1,4 @@
-.modal-overlay {
+.recherche-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,19 +8,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000; /* Ensures the modal is on top of other elements */
 }
 
-.modal {
-    background-color: white;
+.recherche-modal {
+    background-color: #ff0015;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
     max-width: 600px;
-    overflow: hidden;
+    max-height: 80%;
+    overflow-y: auto; /* Allows scrolling if content exceeds max-height */
 }
 
-.modal-header {
+.recherche-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,8 +31,9 @@
     margin-bottom: 10px;
 }
 
-.modal-header h2 {
+.recherche-modal-header h2 {
     margin: 0;
+    font-size: 1.5rem;
 }
 
 .close-button {
@@ -40,19 +43,25 @@
     cursor: pointer;
 }
 
-.modal-content {
-    text-align: center;
+.recherche-modal-content {
+    text-align: left;
+    padding: 0 10px;
 }
 
-.modal-content .no-results {
-    color: #777;
-}
-
-.modal-content .modal-list {
+.recherche-modal-content .modal-list {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
-.modal-content .modal-list li {
+.recherche-modal-content .modal-list li {
     margin-bottom: 10px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+.recherche-modal-content .modal-list li:nth-child(even) {
+    background-color: #f1f1f1;
 }

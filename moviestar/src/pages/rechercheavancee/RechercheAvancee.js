@@ -4,19 +4,46 @@ import FilmsCommuns2Acteurs from './FilmsCommuns2Acteurs';
 import FilmsEntre2Annees from './FilmsEntre2Annees';
 import FilmsEntre2Annees1Acteur from './FilmsEntre2Annees1Acteur';
 import Modal from './Modal';
-import './RechercheAvancee.css'; // Import the CSS file for RechercheAvancee
+import './RechercheAvancee.css';
 
+/**
+ * Composant pour la recherche avancée.
+ *
+ * @component
+ */
 const RechercheAvancee = () => {
+    /**
+     * État pour les résultats du modal.
+     * @type {[any[], Function]} tableau des résultats et fonction de mise à jour
+     */
     const [modalResults, setModalResults] = useState([]);
+
+    /**
+     * État pour le titre du modal.
+     * @type {[string, Function]} titre du modal et fonction de mise à jour
+     */
     const [modalTitle, setModalTitle] = useState('');
+
+    /**
+     * État pour indiquer si le modal est ouvert ou fermé.
+     * @type {[boolean, Function]} état du modal et fonction de mise à jour
+     */
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    /**
+     * Fonction pour mettre à jour les résultats du modal et ouvrir le modal.
+     * @param {string} title Titre du modal
+     * @param {any[]} results Résultats à afficher dans le modal
+     */
     const handleUpdateModalResults = (title, results) => {
         setModalTitle(title);
         setModalResults(results);
         setIsModalOpen(true);
     };
 
+    /**
+     * Fonction pour fermer le modal.
+     */
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };

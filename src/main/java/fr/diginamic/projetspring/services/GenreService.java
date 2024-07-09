@@ -1,11 +1,9 @@
 package fr.diginamic.projetspring.services;
 
-import fr.diginamic.projetspring.entities.Acteur;
 import fr.diginamic.projetspring.entities.Genre;
 import fr.diginamic.projetspring.repositories.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,12 +26,10 @@ public class GenreService {
     }
 
     public Genre updateGenre(Integer genreId, Genre genre) {
-        // Logique de mise à jour de l'acteur (par exemple, vérification de l'existence de l'acteur, validation des données, etc.)
-        if (genreRepository.existsById(genreId)) {
-            genre.setGenreId(genreId);
-            return genreRepository.save(genre);
-        }
-        return null; // Ou lancez une exception appropriée si nécessaire
+        // Votre logique de mise à jour du genre
+
+        // Assurez-vous de retourner le genre mis à jour
+        return genreRepository.save(genre);
     }
 
     public Genre findById(Integer genreId) {

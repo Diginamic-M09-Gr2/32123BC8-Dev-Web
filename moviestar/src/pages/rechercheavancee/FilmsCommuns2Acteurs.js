@@ -3,18 +3,32 @@ import backendRechercheService from '../../services/backendRechercheService';
 import './FilmsCommuns2Acteurs.css'; // Import the CSS file
 
 const FilmsCommuns2Acteurs = ({ onUpdateModalResults }) => {
-    const [acteurId1, setActeurId1] = useState('');
-    const [acteurId2, setActeurId2] = useState('');
-    const [films, setFilms] = useState([]);
+    const [acteurId1, setActeurId1] = useState(''); // État pour l'ID du premier acteur
+    const [acteurId2, setActeurId2] = useState(''); // État pour l'ID du deuxième acteur
+    const [films, setFilms] = useState([]); // État pour la liste des films communs
 
+    /**
+     * Met à jour l'état de l'ID du premier acteur lorsqu'il y a un changement dans l'input.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Événement de changement dans l'input.
+     */
     const handleFilmsByTwoActeurId1Change = (e) => {
         setActeurId1(e.target.value);
     };
 
+    /**
+     * Met à jour l'état de l'ID du deuxième acteur lorsqu'il y a un changement dans l'input.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Événement de changement dans l'input.
+     */
     const handleFilmsByTwoActeurId2Change = (e) => {
         setActeurId2(e.target.value);
     };
 
+    /**
+     * Effectue une requête pour récupérer les films communs aux deux acteurs et met à jour l'état des films.
+     * Appelle également la fonction onUpdateModalResults pour afficher les résultats dans un modal.
+     */
     const handleFetchFilmsByTwoActors = async () => {
         try {
             const response = await backendRechercheService.getFilmsByTwoActors(acteurId1, acteurId2);
@@ -22,7 +36,7 @@ const FilmsCommuns2Acteurs = ({ onUpdateModalResults }) => {
             onUpdateModalResults(`Films communs à deux acteurs`, results);
             setFilms(response.data);
         } catch (error) {
-            console.error('Error fetching films:', error);
+            console.error('Erreur lors de la récupération des films :', error);
         }
     };
 
@@ -37,18 +51,7 @@ const FilmsCommuns2Acteurs = ({ onUpdateModalResults }) => {
                 Id Acteur 2:
                 <input type="text" value={acteurId2} onChange={handleFilmsByTwoActeurId2Change} />
             </label>
-            <button onClick={handleFetchFilmsByTwoActors}>Voir Films</button>
-            <ul>
-                {films.length > 0 ? (
-                    films.map((film, index) => (
-                        <li key={index}>
-                            {film[0]} ({film[1]})
-                        </li>
-                    ))
-                ) : (
-                    <li>Pas de film correspondant</li>
-                )}
-            </ul>
+            <button onClick={handleFetchFilmsByTwoActors}>Valider</button>
         </div>
     );
 };

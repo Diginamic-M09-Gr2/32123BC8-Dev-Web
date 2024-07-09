@@ -33,7 +33,7 @@
 
 /* Use React Icons for the search icon */
 .search-bar button svg {
-    font-size: 20px;
+    font-size: 17px;
     margin-right: 5px; /* Adjust the spacing between the icon and text */
     color: red; /* Red color for the search loop */
 }

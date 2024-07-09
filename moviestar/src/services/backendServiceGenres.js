@@ -1,21 +1,32 @@
-// backendServiceGenres.js
-const API_BASE_URL = 'http://localhost:8080'; // Replace with your backend URL
+const API_BASE_URL = 'http://localhost:8080'; // Remplacez par l'URL de votre backend
 
+/**
+ * Service backend pour les opérations liées aux genres.
+ * @type {Object}
+ */
 const backendServiceGenres = {
-
-    // Fonction pour recuperer la liste des genres
+    /**
+     * Récupère la liste des genres depuis le backend.
+     * @returns {Promise<any>} La promesse contenant les données des genres.
+     * @throws {Error} Si une erreur se produit lors de la récupération des genres.
+     */
     fetchGenres: async () => {
         try {
             const response = await fetch(`${API_BASE_URL}/genres`);
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error fetching genres:', error);
+            console.error('Erreur lors de la récupération des genres :', error);
             throw error;
         }
     },
 
-    // Fonction pour ajouter un genre
+    /**
+     * Ajoute un nouveau genre dans la base de données du backend.
+     * @param {string} genreName Nom du genre à ajouter.
+     * @returns {Promise<any>} La promesse contenant les données de réponse du serveur après l'ajout.
+     * @throws {Error} Si une erreur se produit lors de l'ajout du genre.
+     */
     addGenre: async (genreName) => {
         try {
             const response = await fetch(`${API_BASE_URL}/genres`, {
@@ -29,12 +40,18 @@ const backendServiceGenres = {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error('Error adding genre:', error);
+            console.error('Erreur lors de l\'ajout du genre :', error);
             throw error;
         }
     },
 
-    // Fonction pour modifier un genre
+    /**
+     * Met à jour un genre existant dans la base de données du backend.
+     * @param {string} genreId Identifiant du genre à mettre à jour.
+     * @param {Object} updatedGenre Nouvelles données du genre à mettre à jour.
+     * @returns {Promise<any>} La promesse contenant les données de réponse du serveur après la mise à jour.
+     * @throws {Error} Si une erreur se produit lors de la mise à jour du genre.
+     */
     updateGenre: async (genreId, updatedGenre) => {
         try {
             const response = await fetch(`${API_BASE_URL}/genres/${genreId}`, {
@@ -48,12 +65,17 @@ const backendServiceGenres = {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error(`Error updating genre with ID ${genreId}:`, error);
+            console.error(`Erreur lors de la mise à jour du genre avec l'identifiant ${genreId} :`, error);
             throw error;
         }
     },
 
-    // Fonction pour supprimer un genre
+    /**
+     * Supprime un genre existant de la base de données du backend.
+     * @param {string} genreId Identifiant du genre à supprimer.
+     * @returns {Promise<any>} La promesse contenant les données de réponse du serveur après la suppression.
+     * @throws {Error} Si une erreur se produit lors de la suppression du genre.
+     */
     deleteGenre: async (genreId) => {
         try {
             const response = await fetch(`${API_BASE_URL}/genres/${genreId}`, {
@@ -63,7 +85,7 @@ const backendServiceGenres = {
             const data = await response.json();
             return data;
         } catch (error) {
-            console.error(`Error deleting genre with ID ${genreId}:`, error);
+            console.error(`Erreur lors de la suppression du genre avec l'identifiant ${genreId} :`, error);
             throw error;
         }
     },

@@ -1,10 +1,18 @@
 import React from 'react';
 import RealisateurItem from './RealisateurItem';
-import './ListRealisateurs.css';
+import '../pageslist.css';
 
+/**
+ * Composant représentant une liste de réalisateurs.
+ *
+ * @param {object} props - Les propriétés passées au composant.
+ * @param {array} props.realisateurs - La liste des réalisateurs.
+ * @param {function} props.handleRealisateurClick - La fonction à appeler lors du clic sur un réalisateur.
+ * @returns {JSX.Element} Un élément représentant une liste de réalisateurs.
+ */
 const RealisateurList = ({ realisateurs, handleRealisateurClick }) => {
     return (
-        <div className="realisateurs-list">
+        <div className="pages-list">
             <ul>
                 {realisateurs.map((realisateur, index) => (
                     <li key={index}>

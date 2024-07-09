@@ -1,0 +1,28 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent overall page scrolling */
+    background: #000000; /* Background color for testing */
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex: 1; /* Allow the main content to take available space */
+    margin-top: 20px;
+}
+
+
+
+
+.general-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.general-list li {
+    margin-bottom: 10px;
+}
