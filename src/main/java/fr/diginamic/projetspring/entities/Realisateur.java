@@ -161,6 +161,6 @@ public class Realisateur {
                 ", nom='" + nom + '\'' +
                 ", dateNaissance=" + dateNaissance +
                 ", lieuNaissance='" + lieuNaissance + '\'' +
-                ", urlProfile='" + urlProfile + '\'' + '}';
+                ", urlProfile='" + urlProfile + '\'';
     }
 }
