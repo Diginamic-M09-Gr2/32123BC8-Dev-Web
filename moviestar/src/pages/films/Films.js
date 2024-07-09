@@ -1,14 +1,19 @@
 import React from 'react';
-import FilmsSearchBar from '../../components/searchBar/films/FilmsSearchBar';
+import FilmsSearchBar from '../../components/searchBar/FilmsSearchBar';
 import FilmsList from '../../components/list/films/FilmsList';
 import ModifyFilmModal from '../../components/modify/ModifyFilmModal';
 import { FaCog } from 'react-icons/fa';
 import RoleInfo from '../../modal/films/info/RoleInfo';
-import useFilms from '../../components/hooks/films/useFilms';
+import useFilms from '../../components/hooks/useFilms';
 import '../../styles/global.css';
 import '../generalpage.css';
 import PaginationControl from "../../components/pagination/paginationControl";
 
+/**
+ * Composant React pour la page des films.
+ * Affiche une barre de recherche, une liste de films, un modal de modification,
+ * des informations sur les films sélectionnés, et des contrôles de pagination.
+ */
 const Films = () => {
     const {
         films,

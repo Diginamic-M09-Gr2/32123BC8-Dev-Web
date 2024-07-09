@@ -1,14 +1,19 @@
 import React from 'react';
-import ActeursSearchBar from '../../components/searchBar/acteurs/ActeursSearchBar';
+import ActeursSearchBar from '../../components/searchBar/ActeursSearchBar';
 import ActeursList from '../../components/list/acteurs/ActeursList';
 import ModifyActeurModal from '../../components/modify/ModifyActeurModal';
 import { FaCog } from 'react-icons/fa';
 import FilmInfo from '../../modal/acteurs/info/FilmInfo';
-import useActeurs from '../../components/hooks/acteurs/useActeurs';
+import useActeurs from '../../components/hooks/useActeurs';
 import '../generalpage.css'; // Import the CSS file here
 import '../modifybutton.css';
 import PaginationControl from "../../components/pagination/paginationControl";
 
+/**
+ * Composant React pour la page des acteurs.
+ * Affiche une barre de recherche, une liste d'acteurs, un modal de modification,
+ * des informations sur les acteurs sélectionnés, et des contrôles de pagination.
+ */
 const Acteurs = () => {
     const {
         acteurs,

@@ -1,14 +1,19 @@
 import React from 'react';
-import RealisateursSearchBar from '../../components/searchBar/realisateurs/RealisateursSearchBar'
+import RealisateursSearchBar from '../../components/searchBar/RealisateursSearchBar'
 import RealisateurList from '../../components/list/realisateurs/RealisateurList';
 import ModifyRealisateurModal from '../../components/modify/ModifyRealisateurModal';
 import { FaCog } from 'react-icons/fa';
 import FilmInfo from '../../modal/realisateurs/info/FilmInfo';
 import PaginationControl from '../../components/pagination/paginationControl';
-import useRealisateurs from '../../components/hooks/realisateurs/useRealisateurs';
+import useRealisateurs from '../../components/hooks/useRealisateurs';
 import './realisateurs.css'; // Import the CSS file here
 import '../generalpage.css';
 
+/**
+ * Composant React pour la page des réalisateurs.
+ * Affiche une barre de recherche, une liste de réalisateurs, un modal de modification,
+ * des informations sur les films des réalisateurs sélectionnés, et des contrôles de pagination.
+ */
 const Realisateurs = () => {
     const {
         realisateurs,

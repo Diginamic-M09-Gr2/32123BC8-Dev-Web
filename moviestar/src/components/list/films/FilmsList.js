@@ -1,7 +1,15 @@
 import React from 'react';
-import '../../../pages/realisateurs/realisateurs.css'; // Adjust the import path if needed
-import FilmsItem from './FilmsItem'; // Import the FilmItem component
+import '../../../pages/realisateurs/realisateurs.css';
+import FilmsItem from './FilmsItem';
 
+/**
+ * Composant représentant une liste de films.
+ *
+ * @param {object} props - Les propriétés passées au composant.
+ * @param {array} props.films - La liste des films.
+ * @param {function} props.handleFilmClick - La fonction à appeler lors du clic sur un film.
+ * @returns {JSX.Element} Un élément représentant une liste de films.
+ */
 const FilmsList = ({ films, handleFilmClick }) => {
     return (
         <div className="pages-list">

@@ -1,6 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './modifymodal.css';
 
+/**
+ * Composant pour afficher un modal permettant de modifier les détails d'un film.
+ *
+ * @component
+ * @param {Object} props - Les propriétés passées au composant.
+ * @param {boolean} props.isOpen - Indique si le modal est ouvert.
+ * @param {Function} props.handleClose - Fonction pour fermer le modal.
+ * @param {Object} props.film - Les informations du film à modifier.
+ * @param {string} props.film.nom - Le nom du film.
+ * @param {string} props.film.anneeSortie - L'année de sortie du film.
+ * @param {string} props.film.lieuTournage - Le lieu de tournage du film.
+ * @param {string} props.film.idIMDB - L'identifiant IMDB du film.
+ * @param {string} props.film.rating - Le rating du film.
+ * @param {string} props.film.urlProfile - L'URL du profil du film.
+ * @param {string} props.film.langue - La langue du film.
+ * @param {string} props.film.resume - Le résumé du film.
+ * @param {string} props.film.pays - Le pays d'origine du film.
+ * @param {string} props.film.genres - Les genres du film, séparés par des virgules.
+ * @param {Function} props.onSave - Fonction pour enregistrer les modifications apportées au film.
+ * @returns {JSX.Element} Le composant `ModifyFilmModal`.
+ */
 const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
     const [modifiedInfo, setModifiedInfo] = useState({
         nom: '',
@@ -32,6 +53,11 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
         }
     }, [film]);
 
+    /**
+     * Gère les changements dans les champs de formulaire.
+     *
+     * @param {Object} e - L'événement déclenché par le changement d'entrée.
+     */
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setModifiedInfo((prevInfo) => ({
@@ -40,8 +66,13 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
         }));
     };
 
+    /**
+     * Gère la soumission du formulaire pour enregistrer les modifications.
+     *
+     * @async
+     */
     const handleSave = async () => {
-        // Split genres by comma to convert back to array
+        // Diviser les genres par virgule pour les convertir en tableau
         const genresArray = modifiedInfo.genres.split(',').map(genre => genre.trim());
         await onSave({ ...modifiedInfo, genres: genresArray });
         handleClose();
@@ -51,12 +82,12 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
         <div className={`modify-modal ${isOpen ? 'open' : ''}`}>
             <div className="modify-modal-content">
                 <button className="modify-modal-close" onClick={handleClose}>
-                    Close
+                    Fermer
                 </button>
-                <h2>Modify Film Details</h2>
+                <h2>Modifier les détails du film</h2>
                 <form>
                     <label>
-                        Nom:
+                        Nom :
                         <input
                             type="text"
                             name="nom"
@@ -65,7 +96,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        Année de Sortie:
+                        Année de Sortie :
                         <input
                             type="text"
                             name="anneeSortie"
@@ -74,7 +105,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        Lieu de Tournage:
+                        Lieu de Tournage :
                         <input
                             type="text"
                             name="lieuTournage"
@@ -83,7 +114,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        ID IMDB:
+                        ID IMDB :
                         <input
                             type="text"
                             name="idIMDB"
@@ -92,7 +123,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        Rating:
+                        Rating :
                         <input
                             type="text"
                             name="rating"
@@ -101,7 +132,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        URL de Profil:
+                        URL de Profil :
                         <input
                             type="text"
                             name="urlProfile"
@@ -110,7 +141,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        Langue:
+                        Langue :
                         <input
                             type="text"
                             name="langue"
@@ -119,7 +150,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        Résumé:
+                        Résumé :
                         <textarea
                             name="resume"
                             value={modifiedInfo.resume}
@@ -127,7 +158,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        Pays:
+                        Pays :
                         <input
                             type="text"
                             name="pays"
@@ -136,7 +167,7 @@ const ModifyFilmModal = ({ isOpen, handleClose, film, onSave }) => {
                         />
                     </label>
                     <label>
-                        Genres:
+                        Genres :
                         <input
                             type="text"
                             name="genres"

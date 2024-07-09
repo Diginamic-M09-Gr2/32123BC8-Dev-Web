@@ -1,7 +1,11 @@
-// Home.js
 import React from 'react';
 import './home.css';
 
+/**
+ * Composant fonctionnel représentant la page d'accueil de l'application.
+ *
+ * @returns {JSX.Element} Composant Home
+ */
 const Home = () => {
     return (
         <div className="home-page-container">

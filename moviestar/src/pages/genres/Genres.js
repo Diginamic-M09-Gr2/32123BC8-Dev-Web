@@ -4,16 +4,23 @@ import backendServiceGenres from '../../services/backendServiceGenres';
 import backendServiceFilms from '../../services/backendServiceFilms';
 import '../../styles/genres.css';
 
+/**
+ * Composant fonctionnel pour gérer les genres de films et séries TV.
+ *
+ * @returns {JSX.Element} Composant Genres
+ */
 const Genres = () => {
   const [genres, setGenres] = useState([]);
   const [newGenreName, setNewGenreName] = useState('');
   const [updatedGenreName, setUpdatedGenreName] = useState('');
-  // eslint-disable-next-line
   const [selectedGenreId, setSelectedGenreId] = useState(null);
   const [selectedGenreFilms, setSelectedGenreFilms] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState(null);
 
+  /**
+   * Effet de côté pour charger les genres depuis le backend.
+   */
   useEffect(() => {
     const fetchGenres = async () => {
       try {
@@ -27,6 +34,11 @@ const Genres = () => {
     fetchGenres();
   }, []);
 
+  /**
+   * Fonction pour récupérer les films par genre à partir du backend.
+   *
+   * @param {number} genreId - Identifiant du genre pour lequel récupérer les films.
+   */
   const fetchFilmsByGenre = async (genreId) => {
     try {
       console.log('Fetching films for genreId:', genreId);
@@ -48,7 +60,12 @@ const Genres = () => {
       console.error('Error fetching films by genre:', error);
     }
   };
-// eslint-disable-next-line
+
+  /**
+   * Fonction pour rendre la liste des films du genre sélectionné.
+   *
+   * @returns {JSX.Element} Liste des films du genre sélectionné
+   */
   const renderSelectedGenreFilms = () => {
     return (
       <div>
@@ -64,6 +81,9 @@ const Genres = () => {
     );
   };
 
+  /**
+   * Fonction pour ajouter un nouveau genre.
+   */
   const handleAddGenre = async () => {
     try {
       const newGenre = await backendServiceGenres.addGenre(newGenreName);
@@ -74,6 +94,9 @@ const Genres = () => {
     }
   };
 
+  /**
+   * Fonction pour mettre à jour un genre existant.
+   */
   const handleUpdateGenre = async () => {
     if (selectedGenre !== null && updatedGenreName.trim() !== '') {
       try {
@@ -89,6 +112,11 @@ const Genres = () => {
     }
   };
 
+  /**
+   * Fonction pour supprimer un genre.
+   *
+   * @param {number} genreId - Identifiant du genre à supprimer.
+   */
   const handleDeleteGenre = async (genreId) => {
     try {
       await backendServiceGenres.deleteGenre(genreId);

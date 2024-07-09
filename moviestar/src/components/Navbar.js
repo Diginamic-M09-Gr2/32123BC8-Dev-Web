@@ -1,9 +1,14 @@
-// src/components/Navbar.js
 import React from 'react';
 import {Link, NavLink, useLocation} from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import '../styles/navbar.css';
 
+/**
+ * Composant de barre de navigation principale.
+ *
+ * @component
+ * @returns {JSX.Element} Le composant `Navbar`.
+ */
 const Navbar = () => {
     const location = useLocation();
     const isHome = location.pathname === '/';

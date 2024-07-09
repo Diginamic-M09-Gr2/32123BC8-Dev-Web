@@ -1,7 +1,22 @@
-// ModifyRealisateurModal.js
 import React, { useState, useEffect } from 'react';
 import './modifymodal.css';
 
+/**
+ * Composant pour afficher un modal permettant de modifier les informations d'un réalisateur.
+ *
+ * @component
+ * @param {Object} props - Les propriétés passées au composant.
+ * @param {boolean} props.isOpen - Indique si le modal est ouvert.
+ * @param {Function} props.handleClose - Fonction pour fermer le modal.
+ * @param {Object} props.realisateur - Les informations du réalisateur à modifier.
+ * @param {string} props.realisateur.nom - Le nom du réalisateur.
+ * @param {string} props.realisateur.idIMDB - L'identifiant IMDB du réalisateur.
+ * @param {string} props.realisateur.dateNaissance - La date de naissance du réalisateur.
+ * @param {string} props.realisateur.lieuNaissance - Le lieu de naissance du réalisateur.
+ * @param {string} props.realisateur.urlProfile - L'URL du profil du réalisateur.
+ * @param {Function} props.onSave - Fonction pour enregistrer les modifications apportées au réalisateur.
+ * @returns {JSX.Element} Le composant `ModifyRealisateurModal`.
+ */
 const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) => {
     const [modifiedInfo, setModifiedInfo] = useState({
         nom: '',
@@ -23,6 +38,11 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
         }
     }, [realisateur]);
 
+    /**
+     * Gère les changements dans les champs de formulaire.
+     *
+     * @param {Object} e - L'événement déclenché par le changement d'entrée.
+     */
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setModifiedInfo((prevInfo) => ({
@@ -31,6 +51,11 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
         }));
     };
 
+    /**
+     * Gère la soumission du formulaire pour enregistrer les modifications.
+     *
+     * @async
+     */
     const handleSave = async () => {
         await onSave(modifiedInfo);
         handleClose();
@@ -40,12 +65,12 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
         <div className={`modify-modal ${isOpen ? 'open' : ''}`}>
             <div className="modify-modal-content">
                 <button className="modify-modal-close" onClick={handleClose}>
-                    Close
+                    Fermer
                 </button>
-                <h2>La mélodie n'est pas toujours harmonieuse, changer les informations erronées ici</h2>
+                <h2>Modifier les informations du réalisateur</h2>
                 <form>
                     <label>
-                        Nom:
+                        Nom :
                         <input
                             type="text"
                             name="nom"
@@ -54,7 +79,7 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
                         />
                     </label>
                     <label>
-                        ID IMDB:
+                        ID IMDB :
                         <input
                             type="text"
                             name="idIMDB"
@@ -63,7 +88,7 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
                         />
                     </label>
                     <label>
-                        Date de Naissance:
+                        Date de Naissance :
                         <input
                             type="text"
                             name="dateNaissance"
@@ -72,7 +97,7 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
                         />
                     </label>
                     <label>
-                        Lieu de Naissance:
+                        Lieu de Naissance :
                         <input
                             type="text"
                             name="lieuNaissance"
@@ -81,7 +106,7 @@ const ModifyRealisateurModal = ({ isOpen, handleClose, realisateur, onSave }) =>
                         />
                     </label>
                     <label>
-                        URL de Profil:
+                        URL de Profil :
                         <input
                             type="text"
                             name="urlProfile"

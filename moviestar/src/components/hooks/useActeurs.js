@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
-import backendActeursService from '../../../services/backendActeursService';
+import backendActeursService from '../../services/backendActeursService';
 
+/**
+ * Hook personnalisé pour gérer les acteurs.
+ *
+ * @returns {object} Un objet contenant l'état et les fonctions pour gérer les acteurs.
+ */
 const useActeurs = () => {
     const [acteurs, setActeurs] = useState([]);
     const [filteredActeurs, setFilteredActeurs] = useState([]);
@@ -15,6 +20,9 @@ const useActeurs = () => {
         fetchActeurs();
     }, [page, size]);
 
+    /**
+     * Récupère les acteurs depuis le backend.
+     */
     const fetchActeurs = async () => {
         try {
             const response = await backendActeursService.getAllActeurs(page, size);
@@ -22,10 +30,15 @@ const useActeurs = () => {
             setFilteredActeurs(response.data.content);
             setTotalPages(response.data.totalPages);
         } catch (error) {
-            console.error('Error fetching acteurs:', error);
+            console.error('Erreur lors de la récupération des acteurs:', error);
         }
     };
 
+    /**
+     * Filtre les acteurs en fonction du terme de recherche.
+     *
+     * @param {string} searchTerm - Le terme de recherche pour filtrer les acteurs.
+     */
     const handleSearch = (searchTerm) => {
         const filteredList = acteurs.filter((acteur) =>
             acteur.nom.toLowerCase().includes(searchTerm.toLowerCase())
@@ -33,6 +46,11 @@ const useActeurs = () => {
         setFilteredActeurs(filteredList);
     };
 
+    /**
+     * Gère le clic sur un acteur pour afficher ses détails et ses films.
+     *
+     * @param {object} acteur - L'acteur sélectionné.
+     */
     const handleActeurClick = async (acteur) => {
         try {
             if (acteur.acteurId !== undefined) {
@@ -45,16 +63,22 @@ const useActeurs = () => {
                         films: filmsData.data,
                     });
                 } else {
-                    console.error('Invalid or missing films data:', filmsData);
+                    console.error('Données de films invalides ou manquantes:', filmsData);
                 }
             } else {
-                console.error('Acteur ID is undefined.');
+                console.error('L\'ID de l\'acteur est indéfini.');
             }
         } catch (error) {
-            console.error('Error fetching films:', error);
+            console.error('Erreur lors de la récupération des films:', error);
         }
     };
 
+    /**
+     * Enregistre les modifications apportées à un acteur.
+     *
+     * @param {object} modifiedInfo - Les informations modifiées de l'acteur.
+     * @param {boolean} isModifyButtonClicked - Indique si le bouton de modification a été cliqué.
+     */
     const handleSaveModifiedActeur = async (modifiedInfo, isModifyButtonClicked) => {
         try {
             if (selectedActeur && isModifyButtonClicked) {
@@ -65,10 +89,10 @@ const useActeurs = () => {
                 setModifyModalOpen(false);
                 setSelectedActeur(null);
             } else {
-                console.error('Selected acteur is undefined or Modifier button is not clicked.');
+                console.error('L\'acteur sélectionné est indéfini ou le bouton Modifier n\'a pas été cliqué.');
             }
         } catch (error) {
-            console.error('Error updating acteur:', error);
+            console.error('Erreur lors de la mise à jour de l\'acteur:', error);
         }
     };
 

@@ -3,18 +3,32 @@ import backendRechercheService from '../../services/backendRechercheService';
 import './ActeursCommuns2Films.css'; // Import the CSS file
 
 const ActeursCommuns2Films = ({ onUpdateModalResults }) => {
-    const [filmId1, setFilmId1] = useState('');
-    const [filmId2, setFilmId2] = useState('');
-    const [acteurs, setActeurs] = useState([]);
+    const [filmId1, setFilmId1] = useState(''); // État pour l'ID du premier film
+    const [filmId2, setFilmId2] = useState(''); // État pour l'ID du deuxième film
+    const [acteurs, setActeurs] = useState([]); // État pour la liste des acteurs communs
 
+    /**
+     * Met à jour l'état de l'ID du premier film lorsqu'il y a un changement dans l'input.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Événement de changement dans l'input.
+     */
     const handleActeursInFilmId1Change = (e) => {
         setFilmId1(e.target.value);
     };
 
+    /**
+     * Met à jour l'état de l'ID du deuxième film lorsqu'il y a un changement dans l'input.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Événement de changement dans l'input.
+     */
     const handleActeursInFilmId2Change = (e) => {
         setFilmId2(e.target.value);
     };
 
+    /**
+     * Effectue une requête pour récupérer les acteurs communs aux deux films et met à jour l'état des acteurs.
+     * Appelle également la fonction onUpdateModalResults pour afficher les résultats dans un modal.
+     */
     const handleFetchActeursInFilms = async () => {
         try {
             const response = await backendRechercheService.getActeursInFilms(filmId1, filmId2);
@@ -22,7 +36,7 @@ const ActeursCommuns2Films = ({ onUpdateModalResults }) => {
             onUpdateModalResults(`Acteurs communs à deux films`, results);
             setActeurs(response.data);
         } catch (error) {
-            console.error('Error fetching acteurs:', error);
+            console.error('Erreur lors de la récupération des acteurs :', error);
         }
     };
 

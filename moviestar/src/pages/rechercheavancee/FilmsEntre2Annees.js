@@ -3,18 +3,32 @@ import backendRechercheService from '../../services/backendRechercheService';
 import './FilmsEntre2Annees.css'; // Import the CSS file
 
 const FilmsEntre2Annees = ({ onUpdateModalResults }) => {
-    const [startYear, setStartYear] = useState('');
-    const [endYear, setEndYear] = useState('');
-    const [films, setFilms] = useState([]);
+    const [startYear, setStartYear] = useState(''); // État pour l'année de début
+    const [endYear, setEndYear] = useState(''); // État pour l'année de fin
+    const [films, setFilms] = useState([]); // État pour la liste des films
 
+    /**
+     * Met à jour l'état de l'année de début lorsqu'il y a un changement dans l'input.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Événement de changement dans l'input.
+     */
     const handleBetweenYearsStartYearChange = (e) => {
         setStartYear(e.target.value);
     };
 
+    /**
+     * Met à jour l'état de l'année de fin lorsqu'il y a un changement dans l'input.
+     *
+     * @param {React.ChangeEvent<HTMLInputElement>} e - Événement de changement dans l'input.
+     */
     const handleBetweenYearsEndYearChange = (e) => {
         setEndYear(e.target.value);
     };
 
+    /**
+     * Effectue une requête pour récupérer les films sortis entre les années spécifiées et met à jour l'état des films.
+     * Appelle également la fonction onUpdateModalResults pour afficher les résultats dans un modal.
+     */
     const handleFetchFilmsBetweenYears = async () => {
         try {
             const response = await backendRechercheService.getFilmsReleasedBetweenYears(startYear, endYear);
@@ -22,7 +36,7 @@ const FilmsEntre2Annees = ({ onUpdateModalResults }) => {
             onUpdateModalResults(results);
             setFilms(response.data);
         } catch (error) {
-            console.error('Error fetching films:', error);
+            console.error('Erreur lors de la récupération des films :', error);
         }
     };
 
